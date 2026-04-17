@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Escolher Qualidade</title>
+</head>
+<body>
+
+<h2>Escolha a qualidade</h2>
+
+{% if msg %}
+  <p>{{ msg }}</p>
+{% endif %}
+
+{% if opcoes %}
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="hidden" name="url" value="{{ url }}">
+
+    {% for op in opcoes %}
+        <div>
+            <input type="radio" name="format_id" value="{{ op.format_id }}" required>
+            {{ op.altura }}p ({{ op.ext }})
+        </div>
+    {% endfor %}
+
+    <button type="submit">Baixar</button>
+</form>
+{% endif %}
+
+</body>
+</html>
