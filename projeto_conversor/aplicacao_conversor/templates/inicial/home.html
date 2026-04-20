@@ -107,6 +107,11 @@
       color: #aaa;
     }
 
+    .separador{
+      margin: 2px;
+      color: #ff5a00;
+    }
+
     /* ÍCONES */
     .icons {
       display:flex;
@@ -176,11 +181,30 @@
 
 <div class="container">
   <div class="card">
+   
 
-    <h3>📥 Cole o link do vídeo</h3>
 
     <form method="POST">
       {% csrf_token %}
+
+       {% if opcoes %}
+                    <h3>📥 Qualidades Disponíveis</h3>
+                
+                    {% for op in opcoes %}
+                        <div>
+                            <input type="radio" name="format_id" value="{{ op.format_id }}" required>
+                            {{ op.altura }}p ({{ op.ext }})
+                            <hr class="separador">
+                        </div>
+                    {% endfor %}
+                
+                    <button class="download-btn" type="submit">Baixar</button>
+
+            {% else %}
+
+    <h3>📥 Cole o link do vídeo</h3>
+
+      
       
       <input type="text" name="url" placeholder="https://..." required>
 
@@ -204,40 +228,38 @@
 
       </div>
 
-      <!-- TEXTO -->
-      <div class="platform-label">
-        ⭐ Qual é a plataforma escolhida?
-      </div>
+       <div class="platform-label">
+              ⭐ Qual é a plataforma escolhida?
+            </div>
+          <div class="icons">
 
-      <!-- ÍCONES -->
-      <div class="icons">
+            <label class="icon">
+              <input type="radio" name="plataforma" value="youtube" required>
+              <i class="fab fa-youtube"></i>
+            </label>
 
-        <label class="icon">
-          <input type="radio" name="plataforma" value="youtube" required>
-          <i class="fab fa-youtube"></i>
-        </label>
+            <label class="icon">
+              <input type="radio" name="plataforma" value="instagram">
+              <i class="fab fa-instagram"></i>
+            </label>
 
-        <label class="icon">
-          <input type="radio" name="plataforma" value="instagram">
-          <i class="fab fa-instagram"></i>
-        </label>
+            <label class="icon">
+              <input type="radio" name="plataforma" value="facebook">
+              <i class="fab fa-facebook-f"></i>
+            </label>
 
-        <label class="icon">
-          <input type="radio" name="plataforma" value="facebook">
-          <i class="fab fa-facebook-f"></i>
-        </label>
+            <label class="icon">
+              <input type="radio" name="plataforma" value="twitter">
+              <i class="fab fa-twitter"></i>
+            </label>
 
-        <label class="icon">
-          <input type="radio" name="plataforma" value="twitter">
-          <i class="fab fa-twitter"></i>
-        </label>
+          </div>
 
-      </div>
-
-      <!-- BOTÃO -->
-      <button class="download-btn" type="submit">
-        Baixar
-      </button>
+        <!-- BOTÃO -->
+        <button class="download-btn" type="submit">
+          Baixar
+        </button>
+      {% endif %}
 
     </form>
 
