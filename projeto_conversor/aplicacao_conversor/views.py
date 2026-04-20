@@ -13,7 +13,7 @@ def home(request):
     else:
         url = request.POST.get('url')
         tipo = request.POST.get('tipo')
-        plataforma = request.POST.get('plataforma')
+        plataforma = 'youtube'
 
         return redirect(f"/{plataforma}?url={url}&tipo={tipo}")
 
@@ -139,19 +139,3 @@ def youtube(request):
     })
 
     
-def instagram(request):
-    url = request.GET.get('url')
-    tipo = request.GET.get('tipo')
-    
-    print(url, tipo)
-    
-    return render(request, 'plataformas/instagram.html', {
-        'url': url,
-        'tipo': tipo
-        })
-
-def facebook(request):
-    pass
-
-def twitter(request):
-    pass

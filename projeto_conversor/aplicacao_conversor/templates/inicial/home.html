@@ -188,7 +188,7 @@
       {% csrf_token %}
 
        {% if opcoes %}
-                    <h3>📥 Qualidades Disponíveis</h3>
+                    <h3>📥 Qualidades Disponíveis </h3>
                 
                     {% for op in opcoes %}
                         <div>
@@ -202,7 +202,12 @@
 
             {% else %}
 
-    <h3>📥 Cole o link do vídeo</h3>
+            <h3>
+              
+              Plataforma para download de vídeos e áudios do YouTube 
+              
+              <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="25" alt="YouTube">
+            </h3>
 
       
       
@@ -228,33 +233,8 @@
 
       </div>
 
-       <div class="platform-label">
-              ⭐ Qual é a plataforma escolhida?
-            </div>
-          <div class="icons">
-
-            <label class="icon">
-              <input type="radio" name="plataforma" value="youtube" required>
-              <i class="fab fa-youtube"></i>
-            </label>
-
-            <label class="icon">
-              <input type="radio" name="plataforma" value="instagram">
-              <i class="fab fa-instagram"></i>
-            </label>
-
-            <label class="icon">
-              <input type="radio" name="plataforma" value="facebook">
-              <i class="fab fa-facebook-f"></i>
-            </label>
-
-            <label class="icon">
-              <input type="radio" name="plataforma" value="twitter">
-              <i class="fab fa-twitter"></i>
-            </label>
-
-          </div>
-
+      
+       
         <!-- BOTÃO -->
         <button class="download-btn" type="submit">
           Baixar
