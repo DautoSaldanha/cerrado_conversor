@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aplicacao_conversor',
+    'projeto_conversor.aplicacao_conversor',
 ]
 
 MIDDLEWARE = [
