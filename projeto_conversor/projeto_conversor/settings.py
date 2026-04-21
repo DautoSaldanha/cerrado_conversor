@@ -30,7 +30,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'projeto_conversor.urls'
+ROOT_URLCONF = 'projeto_conversor.projeto_conversor.urls'
 
 TEMPLATES = [
     {
@@ -47,7 +47,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'projeto_conversor.wsgi.application'
+WSGI_APPLICATION = 'projeto_conversor.projeto_conversor.wsgi.application'
 
 DATABASES = {
     'default': {
