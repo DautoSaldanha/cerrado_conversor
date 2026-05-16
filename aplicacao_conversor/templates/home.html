@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cerrado Driver</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+
+<body>
+
+  <header>Cerrado Driver</header>
+
+  <div class="container">
+    <div class="card">
+
+      <form method="POST">
+        {% csrf_token %}
+
+        {% if erro %}
+          <div class="erro">
+            {{ erro }}
+          </div>
+        {% endif %}
+
+        {% if opcoes %}
+
+          <h3>📥 Qualidades Disponíveis</h3>
+
+          {% if titulo %}
+            <p><strong>{{ titulo }}</strong></p>
+          {% endif %}
+
+          <!-- Mantém dados do GET -->
+          <input type="hidden" name="url" value="{{ url }}">
+          <input type="hidden" name="tipo" value="{{ tipo }}">
+
+          {% for op in opcoes %}
+            <label class="quality-option">
+
+              <input
+                type="radio"
+                name="format_id"
+                value="{{ op.format_id }}"
+                required
+              >
+
+              {{ op.altura }}p ({{ op.ext }})
+
+            </label>
+
+            <hr class="separador">
+          {% endfor %}
+
+          <button class="download-btn" type="submit">
+            Baixar
+          </button>
+
+        {% else %}
+
+          <h3>📥 Cole o link do vídeo</h3>
+
+          <input
+            type="text"
+            name="url"
+            placeholder="https://..."
+            required
+          >
+
+          <div class="buttons">
+
+            <label class="btn-option">
+              <input
+                type="radio"
+                name="tipo"
+                value="audio"
+                required
+              >
+              Áudio
+            </label>
+
+            <label class="btn-option">
+              <input
+                type="radio"
+                name="tipo"
+                value="video"
+              >
+              Vídeo
+            </label>
+
+            <label class="btn-option">
+              <input
+                type="radio"
+                name="tipo"
+                value="ambos"
+              >
+              Ambos
+            </label>
+
+          </div>
+
+          <div class="platform-label">
+            ⭐ Qual é a plataforma escolhida?
+          </div>
+
+          <div class="icons">
+
+            <label class="icon">
+              <input
+                type="radio"
+                name="plataforma"
+                value="youtube"
+                required
+              >
+              <i class="fab fa-youtube"></i>
+            </label>
+
+            <label class="icon">
+              <input
+                type="radio"
+                name="plataforma"
+                value="instagram"
+              >
+              <i class="fab fa-instagram"></i>
+            </label>
+
+            <label class="icon">
+              <input
+                type="radio"
+                name="plataforma"
+                value="facebook"
+              >
+              <i class="fab fa-facebook-f"></i>
+            </label>
+
+            <label class="icon">
+              <input
+                type="radio"
+                name="plataforma"
+                value="twitter"
+              >
+              <i class="fab fa-twitter"></i>
+            </label>
+
+          </div>
+
+          <button class="download-btn" type="submit">
+            Baixar
+          </button>
+
+        {% endif %}
+
+      </form>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2026 Cerrado Driver • Todos os direitos reservados
+  </footer>
+
+</body>
+
+</html>
