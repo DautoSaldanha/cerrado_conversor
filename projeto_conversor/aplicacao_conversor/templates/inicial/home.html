@@ -1,272 +1,109 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <title>Cerrado Driver</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
-  <!-- Ícones -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-  <style>
-    * {
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    body {
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      font-family:'Inter', sans-serif;
-      background:#0d0d0d;
-      color:white;
-    }
-
-    header {
-      padding:25px;
-      font-size:2rem;
-      font-weight:700;
-      text-align:center;
-      color:#ff5a00;
-    }
-
-    .container {
-      flex:1;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-    }
-
-    .card {
-      width:100%;
-      max-width:420px;
-      background:#1a1a1a;
-      border:1px solid #333;
-      border-radius:15px;
-      padding:30px;
-      text-align:center;
-      box-shadow:0 0 20px rgba(0,0,0,0.5);
-    }
-
-    h3 {
-      margin-bottom:20px;
-      font-weight:500;
-    }
-
-    input[type="text"] {
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:none;
-      margin-bottom:20px;
-      outline:none;
-      font-size:0.95rem;
-    }
-
-    /* BOTÕES DE ESCOLHA */
-    .buttons {
-      display:flex;
-      gap:10px;
-      margin-bottom:20px;
-    }
-
-    .btn-option input {
-      display:none;
-    }
-
-    .btn-option {
-      flex:1;
-      padding:10px;
-      border-radius:10px;
-      background:#2a2a2a;
-      cursor:pointer;
-      transition:0.3s;
-      text-align:center;
-    }
-
-    .btn-option:hover {
-      background:#ff5a00;
-    }
-
-    .btn-option:has(input:checked) {
-      background:#ff5a00;
-      box-shadow:0 0 10px #ff5a00;
-    }
-
-    /* TEXTO */
-    .platform-label {
-      margin: 25px 0 10px 0;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-
-    .separador{
-      margin: 2px;
-      color: #ff5a00;
-    }
-
-    /* ÍCONES */
-    .icons {
-      display:flex;
-      justify-content:center;
-      gap:15px;
-      flex-wrap:wrap;
-    }
-
-    .icon input {
-      display:none;
-    }
-
-    .icon {
-      width:55px;
-      height:55px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:50%;
-      background:#2a2a2a;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    .icon:hover {
-      background:#ff5a00;
-    }
-
-    .icon:has(input:checked) {
-      border:2px solid #ff5a00;
-      box-shadow:0 0 10px #ff5a00;
-      background:#ff5a0022;
-    }
-
-    /* BOTÃO FINAL */
-    .download-btn {
-      margin-top:20px;
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:#ff5a00;
-      color:white;
-      font-weight:600;
-      cursor:pointer;
-      transition:0.3s;
-    }
-
-    .download-btn:hover {
-      background:#ff2e00;
-      box-shadow:0 0 10px #ff5a00;
-    }
-
-    footer {
-      text-align:center;
-      padding:15px;
-      font-size:0.75rem;
-      background:#111;
-      color:#aaa;
-    }
-  </style>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
 <body>
 
-<header>Cerrado Driver</header>
+  <header>Cerrado Driver</header>
 
-<div class="container">
-  <div class="card">
-   
+  <div class="container">
+    <div class="card">
 
 
-    <form method="POST">
-      {% csrf_token %}
 
-       {% if opcoes %}
-                    <h3>📥 Qualidades Disponíveis</h3>
-                
-                    {% for op in opcoes %}
-                        <div>
-                            <input type="radio" name="format_id" value="{{ op.format_id }}" required>
-                            {{ op.altura }}p ({{ op.ext }})
-                            <hr class="separador">
-                        </div>
-                    {% endfor %}
-                
-                    <button class="download-btn" type="submit">Baixar</button>
+      <form method="POST">
+        {% csrf_token %}
 
-            {% else %}
+        {% if opcoes %}
+        <h3>📥 Qualidades Disponíveis</h3>
 
-    <h3>📥 Cole o link do vídeo</h3>
+        {% for op in opcoes %}
+        <div>
+          <input type="radio" name="format_id" value="{{ op.format_id }}" required>
+          {{ op.altura }}p ({{ op.ext }})
+          <hr class="separador">
+        </div>
+        {% endfor %}
 
-      
-      
-      <input type="text" name="url" placeholder="https://..." required>
+        <button class="download-btn" type="submit">Baixar</button>
 
-      <!-- ESCOLHA DO TIPO -->
-      <div class="buttons">
+        {% else %}
 
-        <label class="btn-option">
-          <input type="radio" name="tipo" value="audio" required>
-          Áudio
-        </label>
+        <h3>📥 Cole o link do vídeo</h3>
 
-        <label class="btn-option">
-          <input type="radio" name="tipo" value="video">
-          Vídeo
-        </label>
 
-        <label class="btn-option">
-          <input type="radio" name="tipo" value="ambos">
-          Ambos
-        </label>
 
-      </div>
+        <input type="text" name="url" placeholder="https://..." required>
 
-       <div class="platform-label">
-              ⭐ Qual é a plataforma escolhida?
-            </div>
-          <div class="icons">
+        <!-- ESCOLHA DO TIPO -->
+        <div class="buttons">
 
-            <label class="icon">
-              <input type="radio" name="plataforma" value="youtube" required>
-              <i class="fab fa-youtube"></i>
-            </label>
+          <label class="btn-option">
+            <input type="radio" name="tipo" value="audio" required>
+            Áudio
+          </label>
 
-            <label class="icon">
-              <input type="radio" name="plataforma" value="instagram">
-              <i class="fab fa-instagram"></i>
-            </label>
+          <label class="btn-option">
+            <input type="radio" name="tipo" value="video">
+            Vídeo
+          </label>
 
-            <label class="icon">
-              <input type="radio" name="plataforma" value="facebook">
-              <i class="fab fa-facebook-f"></i>
-            </label>
+          <label class="btn-option">
+            <input type="radio" name="tipo" value="ambos">
+            Ambos
+          </label>
 
-            <label class="icon">
-              <input type="radio" name="plataforma" value="twitter">
-              <i class="fab fa-twitter"></i>
-            </label>
+        </div>
 
-          </div>
+        <div class="platform-label">
+          ⭐ Qual é a plataforma escolhida?
+        </div>
+        <div class="icons">
+
+          <label class="icon">
+            <input type="radio" name="plataforma" value="youtube" required>
+            <i class="fab fa-youtube"></i>
+          </label>
+
+          <label class="icon">
+            <input type="radio" name="plataforma" value="instagram">
+            <i class="fab fa-instagram"></i>
+          </label>
+
+          <label class="icon">
+            <input type="radio" name="plataforma" value="facebook">
+            <i class="fab fa-facebook-f"></i>
+          </label>
+
+          <label class="icon">
+            <input type="radio" name="plataforma" value="twitter">
+            <i class="fab fa-twitter"></i>
+          </label>
+
+        </div>
 
         <!-- BOTÃO -->
         <button class="download-btn" type="submit">
           Baixar
         </button>
-      {% endif %}
+        {% endif %}
 
-    </form>
+      </form>
 
+    </div>
   </div>
-</div>
 
-<footer>© 2026 Cerrado Driver • Todos os direitos reservados</footer>
+  <footer>© 2026 Cerrado Driver • Todos os direitos reservados</footer>
 
 </body>
+
 </html>
